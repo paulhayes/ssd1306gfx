@@ -1,7 +1,7 @@
 {
   "name": "SSD1306 Grapics Library",
-  "keywords": "",
-  "description": "Atmel AVR compatible graphics library for SSD1306 OLED screens. Specifically built for the ATTiny85 microcontroller",
+  "keywords": "attiny, avr, ssd1306, oled, 128x64",
+  "description": "Atmel AVR compatible graphics library for SSD1306 128x64 OLED screens. Specifically built for the ATTiny85 microcontroller",
   "repository": {
     "type": "git",
     "url": "https://github.com/paulhayes/ssd1306gfx.git"
