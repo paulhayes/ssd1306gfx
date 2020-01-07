@@ -77,7 +77,7 @@ class SSD1306Gfx {
   void startVertical(uint8_t pageStart=0, uint8_t pageEnd=7, uint8_t colStart=0, uint8_t colEnd=0x7f);
   bool nextColumn();
   void drawBackground(uint8_t pattern, uint8_t offset);
-  void drawBox(int16_t x,uint8_t y,uint8_t w,uint8_t h, uint8_t op = 0);
+  void drawBox(int16_t x,uint8_t y,uint8_t w,uint8_t h, uint8_t flags = 0);
   void drawSprite(int16_t x,uint8_t y,uint8_t w,uint8_t h, const uint8_t * pattern,uint16_t ptnLen=1, uint8_t flags = 0);
   void drawSpritePM(int16_t x,uint8_t y,uint8_t w,uint8_t h, const uint8_t * pattern,uint16_t ptnLen=1, uint8_t flags = 0);
   void drawText(uint8_t x, uint8_t y, char * str);

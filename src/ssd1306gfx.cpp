@@ -113,7 +113,7 @@ void SSD1306Gfx::drawBackground(uint8_t pattern, uint8_t offset)
     ((uint8_t *)(&this->colBuf))[offset] = pattern;
 }
 
-void SSD1306Gfx::drawBox(int16_t x, uint8_t y, uint8_t w, uint8_t h, uint8_t op)
+void SSD1306Gfx::drawBox(int16_t x, uint8_t y, uint8_t w, uint8_t h, uint8_t flags)
 {
     if ((x > this->colIndex) || ((x + w) <= (this->colIndex)) || (y >= (this->pageEnd * 8)) || (y + h) < (this->pageStart * 8))
     {
@@ -123,16 +123,17 @@ void SSD1306Gfx::drawBox(int16_t x, uint8_t y, uint8_t w, uint8_t h, uint8_t op)
     x = this->colIndex - x;
     uint64_t box = ((~((uint64_t)0)) >> (64 - h)) << y;
 
-    switch (op)
+    switch (flags&AllBlends)
     {
-    case SSD1306Gfx::BlendModeAdd:
-        this->colBuf |= box;
-        break;
     case SSD1306Gfx::BlendModeXor:
         this->colBuf ^= box;
         break;
     case SSD1306Gfx::BlendModeSubtract:
         this->colBuf &= ~box;
+    case SSD1306Gfx::BlendModeAdd:
+    default:
+        this->colBuf |= box;
+        break;
     }
 }
 
