@@ -122,7 +122,6 @@ void SSD1306Gfx::drawBox(int16_t x, uint8_t y, uint8_t w, uint8_t h, uint8_t fla
     //uint8_t numRows = h / 8 + 1;
     x = this->colIndex - x;
     uint64_t box = ((~((uint64_t)0)) >> (64 - h)) << y;
-
     switch (flags&AllBlends)
     {
     case SSD1306Gfx::BlendModeXor:
@@ -166,8 +165,6 @@ void SSD1306Gfx::drawSprite(int16_t x, uint8_t y, uint8_t w, uint8_t h, const ui
             }
         }
         uint64_t sprite = box & ((uint64_t)(c) << (y + i * 8));
-
-        
         switch (flags&AllBlends)
         {        
         case SSD1306Gfx::BlendModeXor:
@@ -182,25 +179,6 @@ void SSD1306Gfx::drawSprite(int16_t x, uint8_t y, uint8_t w, uint8_t h, const ui
         }
     }
 }
-
-/*
-void SSD1306Gfx::drawSpritePM(int16_t x, uint8_t y, uint8_t w, uint8_t h, const uint8_t pattern[], uint16_t ptnLen)
-{
-    if ((x > this->colIndex) || ((x + w) <= (this->colIndex)) || (y >= (this->pageEnd * 8)) || (y + h) < (this->pageStart * 8))
-    {
-        return;
-    }
-
-    uint8_t numRows = h / 8 + 1;
-    x = this->colIndex - x;
-    uint64_t box = ((~((uint64_t)0)) >> (64 - h)) << y;
-    for (int i = 0; i < numRows; i++)
-    {
-        uint8_t c = pgm_read_byte(&pattern[(x + w * i) % ptnLen]);
-        this->colBuf |= box & ((uint64_t)(c) << (y + i * 8));
-    }
-}
-*/
 
 void SSD1306Gfx::drawSpritePM(int16_t x, uint8_t y, uint8_t w, uint8_t h, const uint8_t pattern[], uint16_t ptnLen, uint8_t flags){
   drawSprite(x,y,w,h,pattern,ptnLen, flags|SpriteFlagUseProgmem);
