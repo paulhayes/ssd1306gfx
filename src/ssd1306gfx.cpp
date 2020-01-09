@@ -3,7 +3,6 @@
 #include "Wire.h"
 #include <avr/pgmspace.h>
 #include <string.h>
-#include "font6x8.h"
 
 void SSD1306Gfx::init()
 {
@@ -184,25 +183,25 @@ void SSD1306Gfx::drawSpritePM(int16_t x, uint8_t y, uint8_t w, uint8_t h, const 
   drawSprite(x,y,w,h,pattern,ptnLen, flags|SpriteFlagUseProgmem);
 }
 
-void SSD1306Gfx::drawText(uint8_t x, uint8_t y, char *str)
+void SSD1306Gfx::drawText(uint8_t x, uint8_t y, char *str, const uint8_t font[], uint16_t startAddress)
 {
     int len = strlen(str);
     const int charWidth = 6;
     int w = len * charWidth;
     int sample = this->colIndex - x;
     int d = sample / charWidth;
-    char c = str[d];
-    this->drawSpritePM(x, y, w, 8, &ssd1306xled_font6x8[c * 6], 6);
+    char c = str[d+startAddress];
+    this->drawSpritePM(x, y, w, 8, &font[c * 6], 6);
 }
 
-void SSD1306Gfx::drawDigit(uint8_t x, uint8_t y, uint8_t digit)
+void SSD1306Gfx::drawDigit(uint8_t x, uint8_t y, uint8_t digit, const uint8_t font[], uint16_t startAddress)
 {
     digit = digit % 10;
     const int charWidth = 6;
     //int sample = this->colIndex-x;
     //int d = sample/charWidth;
-    char c = digit + 0x10;
-    this->drawSpritePM(x, y, charWidth, 8, &ssd1306xled_font6x8[c * 6], 6);
+    char c = digit + startAddress;
+    this->drawSpritePM(x, y, charWidth, 8, &font[c * 6], 6);
 }
 
 void SSD1306Gfx::clear()
