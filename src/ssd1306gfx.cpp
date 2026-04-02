@@ -12,6 +12,7 @@ void SSD1306Gfx::init()
     // SEG = COL = segment = column byte data on a page
     // Page = 8 pixel tall row. Has 128 SEGs and 8 COMs
     // COM = row
+    Wire.setClock(400000);
 
     // Begin the I2C comm with SSD1306's address (SLA+Write)
     Wire.beginTransmission(OLED_I2C_ADDRESS);
